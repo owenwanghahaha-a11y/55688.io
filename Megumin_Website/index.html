@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>惠惠～泳裝ver.～ 模型展示特設網頁</title>
+    
+    <!-- 引入 Google 字體 - Noto Sans TC (300, 400, 700, 900) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- 引入 AOS 動畫 CSS 套件 -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        /* --- 基礎設定 --- */
+        :root {
+            --primary-color: #333333; 
+            --accent-color: #d93838;  /* 惠惠招牌：爆裂紅主題色 */
+            --bg-color: #ffffff;      /* 基礎背景色 */
+            --circle-color: #f2a6a6;  /* 第二頁圓框裝飾線顏色 */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- 1. 首圖視覺區 (第一頁) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* 👇 請確保 images/hero.jpg 的圖片存在於 images 資料夾內 */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), url('./images/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 視差滾動效果 */
+        }
+
+        /* 優化首圖標題：增加字體大小、更改顏色與雙重立體陰影 */
+        .hero h1 {
+            font-size: 4.8rem;
+            letter-spacing: 6px;
+            margin-bottom: 25px;
+            font-weight: 900;
+            color: #ffda75; /* 爆裂魔法金黃色 */
+            text-shadow: 3px 3px 0px #b31b1b, 5px 5px 20px rgba(0,0,0,0.9);
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.9);
+        }
+
+        /* --- 2. 介紹視覺區 (第二頁) --- */
+        .intro-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 140px 20px;
+            position: relative;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* 左側：模型立繪 (請確保 images/intro.png 存在，且為去背 PNG 檔) */
+        .intro-image {
+            flex: 0 0 45%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .intro-image img {
+            width: 100%;
+            max-height: 800px;
+            object-fit: contain;
+            filter: drop-shadow(10px 10px 15px rgba(0,0,0,0.15)); 
+        }
+
+        /* 右側：文字與背景圓框 */
+        .intro-text-box {
+            flex: 0 0 50%;
+            position: relative;
+            padding: 20px 0 20px 60px;
+            z-index: 1;
+        }
+
+        /* 背景大圓框設計 */
+        .circle-bg {
+            position: absolute;
+            top: 50%;
+            right: -20%; 
+            transform: translateY(-50%);
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            border: 4px solid var(--circle-color);
+            z-index: -1;
+            opacity: 0.7;
+        }
+
+        /* 圓框上的星芒裝飾 */
+        .star {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #d1b87a; 
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .star-1 { top: 15%; right: 10%; transform: rotate(15deg); width: 40px; height: 40px; }
+        .star-2 { bottom: 15%; left: 15%; transform: rotate(-20deg); }
+        .star-3 { bottom: 10%; left: 25%; width: 20px; height: 20px; transform: rotate(10deg); }
+
+        /* 優化第二頁文字排版：加寬行距、段落距離與字距 */
+        .intro-text-box h2 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            line-height: 1.5;
+            letter-spacing: 3px;
+        }
+
+        .intro-text-box p {
+            font-size: 1.25rem;
+            color: #444;
+            margin-bottom: 35px; /* 加大段落間距 */
+            line-height: 2.2;    /* 加大行高 */
+            font-weight: 700;    /* 加粗字體 */
+            letter-spacing: 1.5px;
+            text-align: justify;
+        }
+
+        /* --- 3. 焦點細節區 (第三頁) --- */
+        .highlights-section {
+            position: relative;
+            background: linear-gradient(135deg, #ff9a62 0%, #ff5e62 100%); 
+            padding: 120px 20px;
+            overflow: hidden;
+        }
+
+        /* 背景英文草寫裝飾 */
+        .bg-text {
+            position: absolute;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 16rem;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 1;
+            user-select: none;
+        }
+        .bg-text-top { top: -50px; left: -20px; }
+        .bg-text-bottom { bottom: -100px; right: -50px; }
+
+        .gallery-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            aspect-ratio: 3 / 4; 
+            background-color: #fff;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .image-wrapper:hover img {
+            transform: scale(1.05); 
+        }
+
+        /* 放大鏡 Icon (+) */
+        .zoom-icon {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            pointer-events: none; 
+        }
+
+        .zoom-icon::before {
+            content: '+';
+            font-size: 28px;
+            font-weight: 300;
+            color: #333;
+            line-height: 1;
+        }
+
+        .gallery-text {
+            color: #ffffff;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 700;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            padding: 0 10px;
+        }
+
+        /* --- 4. 行動呼籲區 (CTA Section) --- */
+        .cta-section {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 90px 20px;
+            margin-top: 30px;
+        }
+
+        .cta-section h2 {
+            margin-bottom: 35px;
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 18px 45px;
+            font-size: 1.3rem;
+            text-decoration: none;
+            border-radius: 40px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 5px 15px rgba(217, 56, 56, 0.4);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            background-color: #ff4d4d;
+            box-shadow: 0 8px 20px rgba(217, 56, 56, 0.6);
+        }
+
+        /* --- 5. 商品規格與版權區 (Footer & Specs) --- */
+        footer {
+            background-color: #f9f9f9;
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .specs-table {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-collapse: collapse;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .specs-table th, .specs-table td {
+            border: 1px solid #eee;
+            padding: 20px 15px;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+
+        .specs-table th {
+            background-color: var(--primary-color);
+            color: white;
+            width: 30%;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .copyright {
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 50px;
+            line-height: 1.8;
+        }
+
+        /* --- RWD 響應式設計 --- */
+        @media (max-width: 992px) {
+            .intro-section { flex-direction: column; padding: 80px 20px; }
+            .intro-image, .intro-text-box { flex: 0 0 100%; padding: 0; margin-bottom: 40px; }
+            .circle-bg { width: 500px; height: 500px; right: -30%; }
+            .hero h1 { font-size: 3rem; }
+            .hero p { font-size: 1.4rem; }
+            .intro-text-box h2 { font-size: 2.2rem; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .bg-text { font-size: 10rem; }
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+            .specs-table th, .specs-table td { display: block; width: 100%; }
+            .specs-table th { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. 首圖視覺區 -->
+    <header class="hero">
+        <div data-aos="fade-up" data-aos-duration="1500">
+            <h1>Coreful 模型 惠惠～泳裝ver.～</h1>
+            <p>《為美好的世界獻上祝福！3》</p>
+        </div>
+    </header>
+
+    <!-- 2. 介紹視覺區 -->
+    <section class="intro-section">
+        
+        <!-- 左側：去背模型立繪 -->
+        <div class="intro-image" data-aos="fade-right" data-aos-duration="1500">
+            <!-- 👇 請確保 images/intro.png 的去背圖片存在於 images 資料夾內 -->
+            <img src="./images/intro.png" alt="惠惠 泳裝模型 立繪展示">
+        </div>
+
+        <!-- 右側：文案與裝飾背景 -->
+        <div class="intro-text-box" data-aos="fade-left" data-aos-duration="1500">
+            <div class="circle-bg">
+                <div class="star star-1"></div>
+                <div class="star star-2"></div>
+                <div class="star star-3"></div>
+            </div>
+            
+            <h2>充滿夏日氣息的爆裂魔法使，<br>在落日海灘展現耀眼魅力。</h2>
+            <p>出自《為美好的世界獻上祝福！3》，天才紅魔族少女「惠惠」以泳裝姿態化身為 Coreful 模型。</p>
+            <p>將惠惠特有的黑色系比基尼、經典魔法帽完美結合，充滿夏日風情的設計精心製成模型。</p>
+            <p>披風的垂墜感與腿部繃帶細節生動還原，手中鑲嵌著紅寶石的法杖，在夕陽的映照下更顯精緻，讓表情在不同的光線角度下展現出豐富且截然不同的立體層次。</p>
+            <p>將與平時穿著長袍截然不同、充滿自信準備詠唱爆裂魔法的「惠惠」帶回家鑑賞吧。</p>
+        </div>
+
+    </section>
+
+    <!-- 3. 焦點細節區 -->
+    <section class="highlights-section">
+        <!-- 背景裝飾文字 -->
+        <div class="bg-text bg-text-top">Figure</div>
+        <div class="bg-text bg-text-bottom">Highlights</div>
+
+        <div class="gallery-container">
+            <div class="gallery-grid">
+                
+                <!-- 細節圖 1 (請確保 images/detail1.jpg 存在於 images 資料夾內) -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="0">
+                    <div class="image-wrapper">
+                        <img src="./images/detail1.jpg" alt="惠惠 泳裝腰部細節照">
+                        <div class="zoom-icon"></div>
+                    </div>
+                    <p class="gallery-text">重現了充滿夏日風情的黑色比基尼，展現出纖細迷人的腰部曲線與健康肌膚。</p>
+                </div>
+
+                <!-- 細節圖 2 (請確保 images/detail2.jpg 存在於 images 資料夾內) -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="150">
+                    <div class="image-wrapper">
+                        <img src="./images/detail2.jpg" alt="惠惠 披風與繃帶細節照">
+                        <div class="zoom-icon"></div>
+                    </div>
+                    <p class="gallery-text">標誌性的魔法帽與飄逸披風精心刻畫，搭配腿部繃帶細節，動態感十足。</p>
+                </div>
+
+                <!-- 細節圖 3 (請確保 images/detail3.jpg 存在於 images 資料夾內) -->
+                <div class="gallery-item" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+                    <div class="image-wrapper">
+                        <img src="./images/detail3.jpg" alt="惠惠 法杖與招牌笑容細節照">
+                        <div class="zoom-icon"></div>
+                    </div>
+                    <p class="gallery-text">手中緊握鑲嵌著紅寶石的專屬法杖，搭配充滿自信的招牌笑容，魅力無法擋！</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 行動呼籲區 -->
+    <section class="cta-section">
+        <div class="container" data-aos="zoom-in" data-aos-duration="1000">
+            <h2>感受爆裂魔法使的夏日魅力</h2>
+            <!-- 👇 修改了按鈕文字與超連結，並設定另開新分頁 -->
+            <a href="https://sites.google.com/view/phantom--fox/" target="_blank" rel="noopener noreferrer" class="cta-btn">查看更多 幻狐模型 資訊</a>
+        </div>
+    </section>
+
+    <!-- 5. 商品規格與版權區 -->
+    <footer>
+        <div class="container">
+            <table class="specs-table" data-aos="fade-up" data-aos-duration="1000">
+                <tbody>
+                    <tr>
+                        <th>商品名稱</th>
+                        <td>《為美好的世界獻上祝福！3》Coreful 模型 惠惠～泳裝ver.～<br>（この素晴らしい世界に祝福を！３ Coreful フィギュア めぐみん～水着ver.～）</td>
+                    </tr>
+                    <tr>
+                        <th>作品名稱</th>
+                        <td>為美好的世界獻上祝福！3</td>
+                    </tr>
+                    <tr>
+                        <th>發行廠商</th>
+                        <td>TAITO</td>
+                    </tr>
+                    <tr>
+                        <th>品牌系列</th>
+                        <td>Coreful 模型（Coreful フィギュア）</td>
+                    </tr>
+                    <tr>
+                        <th>登場日期</th>
+                        <td>2024 年 7 月中旬</td>
+                    </tr>
+                    <tr>
+                        <th>商品尺寸</th>
+                        <td>全高約 18 公分</td>
+                    </tr>
+                    <tr>
+                        <th>款式種類</th>
+                        <td>全 1 種</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="copyright">
+                <p>© 2024 Natsume Akatsuki, Kurone Mishima / KADOKAWA / KONOSUBA3 Partners</p>
+                <!-- 👇 修改了版權宣告文字 -->
+                <p>© Phantom Fox Model Studio</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 引入 AOS 動畫 JS 套件 -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // 初始化滑動動畫
+        AOS.init({
+            once: true, // 動畫只會觸發一次 (往上滑不重複觸發)
+            offset: 100 // 提早 100px 觸發動畫
+        });
+    </script>
+</body>
+</html>
